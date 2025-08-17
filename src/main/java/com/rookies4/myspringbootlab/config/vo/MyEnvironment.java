@@ -1,4 +1,4 @@
-package com.rookies4.myspringbootlab.Config.vo;
+package com.rookies4.myspringbootlab.config.vo;
 
 import lombok.Builder;
 import lombok.Getter;

@@ -45,7 +45,7 @@ class BookRepositoryTest {
         bookRepository.saveAll(List.of(b1, b2));
         bookRepository.flush(); // 즉시 반영
 
-        // 3) 확인 및 샘플 포맷 출력
+        // 3) 확인 및 출력
         assertThat(bookRepository.existsByIsbn(isbn1)).isTrue();
         assertThat(bookRepository.existsByIsbn(isbn2)).isTrue();
     }

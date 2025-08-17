@@ -1352,3 +1352,150 @@ org.springframework.transaction.UnexpectedRollbackException: Transaction silentl
 2025-08-16T21:32:22.545+09:00  INFO 24108 --- [MySpringbootLab] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2025-08-16T21:32:22.548+09:00  INFO 24108 --- [MySpringbootLab] [SpringApplicationShutdownHook] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown initiated...
 2025-08-16T21:32:22.552+09:00  INFO 24108 --- [MySpringbootLab] [SpringApplicationShutdownHook] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown completed.
+2025-08-17T16:07:32.465+09:00  INFO 5356 --- [MySpringbootLab] [restartedMain] c.r.m.MySpringbootLabApplication         : Starting MySpringbootLabApplication using Java 23.0.1 with PID 5356 (C:\mybackend\SpringBoot\MySpringbootLab\target\classes started by 82103 in C:\mybackend\SpringBoot\MySpringbootLab)
+2025-08-17T16:07:32.470+09:00  INFO 5356 --- [MySpringbootLab] [restartedMain] c.r.m.MySpringbootLabApplication         : The following 1 profile is active: "prod"
+2025-08-17T16:07:32.525+09:00  INFO 5356 --- [MySpringbootLab] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-08-17T16:07:32.525+09:00  INFO 5356 --- [MySpringbootLab] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-08-17T16:07:33.544+09:00  INFO 5356 --- [MySpringbootLab] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-08-17T16:07:33.599+09:00  INFO 5356 --- [MySpringbootLab] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 45 ms. Found 1 JPA repository interface.
+2025-08-17T16:07:34.164+09:00  INFO 5356 --- [MySpringbootLab] [restartedMain] o.s.b.w.e.t.TomcatWebServer              : Tomcat initialized with port 8080 (http)
+2025-08-17T16:07:34.180+09:00  INFO 5356 --- [MySpringbootLab] [restartedMain] o.a.c.c.StandardService                  : Starting service [Tomcat]
+2025-08-17T16:07:34.181+09:00  INFO 5356 --- [MySpringbootLab] [restartedMain] o.a.c.c.StandardEngine                   : Starting Servlet engine: [Apache Tomcat/10.1.43]
+2025-08-17T16:07:34.222+09:00  INFO 5356 --- [MySpringbootLab] [restartedMain] o.a.c.c.C.[.[.[/]                        : Initializing Spring embedded WebApplicationContext
+2025-08-17T16:07:34.223+09:00  INFO 5356 --- [MySpringbootLab] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1697 ms
+2025-08-17T16:07:34.445+09:00  INFO 5356 --- [MySpringbootLab] [restartedMain] o.h.j.i.u.LogHelper                      : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-08-17T16:07:34.511+09:00  INFO 5356 --- [MySpringbootLab] [restartedMain] o.h.Version                              : HHH000412: Hibernate ORM core version 6.6.22.Final
+2025-08-17T16:07:34.546+09:00  INFO 5356 --- [MySpringbootLab] [restartedMain] o.h.c.i.RegionFactoryInitiator           : HHH000026: Second-level cache disabled
+2025-08-17T16:07:34.828+09:00  INFO 5356 --- [MySpringbootLab] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-08-17T16:07:34.874+09:00  INFO 5356 --- [MySpringbootLab] [restartedMain] c.z.h.HikariDataSource                   : HikariPool-1 - Starting...
+2025-08-17T16:07:34.999+09:00  INFO 5356 --- [MySpringbootLab] [restartedMain] c.z.h.p.HikariPool                       : HikariPool-1 - Added connection org.mariadb.jdbc.Connection@4d9abe48
+2025-08-17T16:07:35.000+09:00  INFO 5356 --- [MySpringbootLab] [restartedMain] c.z.h.HikariDataSource                   : HikariPool-1 - Start completed.
+2025-08-17T16:07:35.033+09:00  WARN 5356 --- [MySpringbootLab] [restartedMain] o.h.o.deprecation                        : HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-08-17T16:07:35.058+09:00  INFO 5356 --- [MySpringbootLab] [restartedMain] o.h.o.c.pooling                          : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 10.11.5
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-08-17T16:07:35.816+09:00  INFO 5356 --- [MySpringbootLab] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-08-17T16:07:35.896+09:00  INFO 5356 --- [MySpringbootLab] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-08-17T16:07:36.211+09:00  WARN 5356 --- [MySpringbootLab] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-08-17T16:07:36.446+09:00  WARN 5356 --- [MySpringbootLab] [restartedMain] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2025-08-17T16:07:36.713+09:00  INFO 5356 --- [MySpringbootLab] [restartedMain] o.s.b.a.h.H2ConsoleAutoConfiguration     : H2 console available at '/h2-console'. Database available at 'jdbc:mariadb://127.0.0.1:3307/lab_db?user=lab&password=***'
+2025-08-17T16:07:36.742+09:00  INFO 5356 --- [MySpringbootLab] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-08-17T16:07:36.748+09:00  INFO 5356 --- [MySpringbootLab] [restartedMain] o.s.b.a.e.w.EndpointLinksResolver        : Exposing 1 endpoint beneath base path '/actuator'
+2025-08-17T16:07:36.812+09:00  INFO 5356 --- [MySpringbootLab] [restartedMain] o.s.b.w.e.t.TomcatWebServer              : Tomcat started on port 8080 (http) with context path '/'
+2025-08-17T16:07:36.821+09:00  INFO 5356 --- [MySpringbootLab] [restartedMain] c.r.m.MySpringbootLabApplication         : Started MySpringbootLabApplication in 4.871 seconds (process running for 7.375)
+2025-08-17T16:07:36.827+09:00  INFO 5356 --- [MySpringbootLab] [restartedMain] c.r.m.r.MyPropRunner                     : 현재 활성화된 MyEnvironment Bean = MyEnvironment(mode=운영환경, rate=1.5)
+2025-08-17T16:07:36.827+09:00  INFO 5356 --- [MySpringbootLab] [restartedMain] c.r.m.r.MyPropRunner                     : MyBootProperties.getUsername() = MySpringbootLab
+2025-08-17T16:07:36.827+09:00  INFO 5356 --- [MySpringbootLab] [restartedMain] c.r.m.r.MyPropRunner                     : MyBootProperties.getPort() = 67
+2025-08-17T16:07:36.828+09:00  INFO 5356 --- [MySpringbootLab] [restartedMain] c.r.m.r.MyPropRunner                     : Properties myprop.username = MySpringbootLab
+2025-08-17T16:07:36.828+09:00  INFO 5356 --- [MySpringbootLab] [restartedMain] c.r.m.r.MyPropRunner                     : Properties myprop.port = 28
+2025-08-17T16:07:37.198+09:00  INFO 5356 --- [MySpringbootLab] [RMI TCP Connection(4)-192.168.45.40] o.a.c.c.C.[.[.[/]                        : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-08-17T16:07:37.199+09:00  INFO 5356 --- [MySpringbootLab] [RMI TCP Connection(4)-192.168.45.40] o.s.w.s.DispatcherServlet                : Initializing Servlet 'dispatcherServlet'
+2025-08-17T16:07:37.203+09:00  INFO 5356 --- [MySpringbootLab] [RMI TCP Connection(4)-192.168.45.40] o.s.w.s.DispatcherServlet                : Completed initialization in 2 ms
+2025-08-17T16:07:50.580+09:00  WARN 5356 --- [MySpringbootLab] [http-nio-8080-exec-1] o.m.j.m.s.ErrorPacket                    : Error: 1062-23000: Duplicate entry '9788956746425' for key 'idx_books_isbn'
+2025-08-17T16:07:50.581+09:00  WARN 5356 --- [MySpringbootLab] [http-nio-8080-exec-1] o.h.e.j.s.SqlExceptionHelper             : SQL Error: 1062, SQLState: 23000
+2025-08-17T16:07:50.582+09:00 ERROR 5356 --- [MySpringbootLab] [http-nio-8080-exec-1] o.h.e.j.s.SqlExceptionHelper             : (conn=3) Duplicate entry '9788956746425' for key 'idx_books_isbn'
+2025-08-17T16:07:50.596+09:00  WARN 5356 --- [MySpringbootLab] [http-nio-8080-exec-1] c.r.m.e.DefaultExceptionAdvice           : IntegrityViolation: (conn=3) Duplicate entry '9788956746425' for key 'idx_books_isbn'
+2025-08-17T16:07:50.614+09:00  WARN 5356 --- [MySpringbootLab] [http-nio-8080-exec-1] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.dao.DataIntegrityViolationException: could not execute statement [(conn=3) Duplicate entry '9788956746425' for key 'idx_books_isbn'] [insert into books (author,isbn,price,publish_date,title) values (?,?,?,?,?)]; SQL [insert into books (author,isbn,price,publish_date,title) values (?,?,?,?,?)]; constraint [idx_books_isbn]]
+2025-08-17T16:07:51.988+09:00  WARN 5356 --- [MySpringbootLab] [http-nio-8080-exec-3] o.m.j.m.s.ErrorPacket                    : Error: 1062-23000: Duplicate entry '9788956746432' for key 'idx_books_isbn'
+2025-08-17T16:07:51.988+09:00  WARN 5356 --- [MySpringbootLab] [http-nio-8080-exec-3] o.h.e.j.s.SqlExceptionHelper             : SQL Error: 1062, SQLState: 23000
+2025-08-17T16:07:51.988+09:00 ERROR 5356 --- [MySpringbootLab] [http-nio-8080-exec-3] o.h.e.j.s.SqlExceptionHelper             : (conn=3) Duplicate entry '9788956746432' for key 'idx_books_isbn'
+2025-08-17T16:07:51.990+09:00  WARN 5356 --- [MySpringbootLab] [http-nio-8080-exec-3] c.r.m.e.DefaultExceptionAdvice           : IntegrityViolation: (conn=3) Duplicate entry '9788956746432' for key 'idx_books_isbn'
+2025-08-17T16:07:51.992+09:00  WARN 5356 --- [MySpringbootLab] [http-nio-8080-exec-3] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.dao.DataIntegrityViolationException: could not execute statement [(conn=3) Duplicate entry '9788956746432' for key 'idx_books_isbn'] [insert into books (author,isbn,price,publish_date,title) values (?,?,?,?,?)]; SQL [insert into books (author,isbn,price,publish_date,title) values (?,?,?,?,?)]; constraint [idx_books_isbn]]
+2025-08-17T16:09:49.768+09:00  WARN 5356 --- [MySpringbootLab] [http-nio-8080-exec-8] o.m.j.m.s.ErrorPacket                    : Error: 1062-23000: Duplicate entry '9788956746425' for key 'idx_books_isbn'
+2025-08-17T16:09:49.769+09:00  WARN 5356 --- [MySpringbootLab] [http-nio-8080-exec-8] o.h.e.j.s.SqlExceptionHelper             : SQL Error: 1062, SQLState: 23000
+2025-08-17T16:09:49.769+09:00 ERROR 5356 --- [MySpringbootLab] [http-nio-8080-exec-8] o.h.e.j.s.SqlExceptionHelper             : (conn=3) Duplicate entry '9788956746425' for key 'idx_books_isbn'
+2025-08-17T16:09:49.771+09:00  WARN 5356 --- [MySpringbootLab] [http-nio-8080-exec-8] c.r.m.e.DefaultExceptionAdvice           : IntegrityViolation: (conn=3) Duplicate entry '9788956746425' for key 'idx_books_isbn'
+2025-08-17T16:09:49.772+09:00  WARN 5356 --- [MySpringbootLab] [http-nio-8080-exec-8] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.dao.DataIntegrityViolationException: could not execute statement [(conn=3) Duplicate entry '9788956746425' for key 'idx_books_isbn'] [insert into books (author,isbn,price,publish_date,title) values (?,?,?,?,?)]; SQL [insert into books (author,isbn,price,publish_date,title) values (?,?,?,?,?)]; constraint [idx_books_isbn]]
+2025-08-17T16:09:50.074+09:00  WARN 5356 --- [MySpringbootLab] [http-nio-8080-exec-1] o.m.j.m.s.ErrorPacket                    : Error: 1062-23000: Duplicate entry '9788956746432' for key 'idx_books_isbn'
+2025-08-17T16:09:50.074+09:00  WARN 5356 --- [MySpringbootLab] [http-nio-8080-exec-1] o.h.e.j.s.SqlExceptionHelper             : SQL Error: 1062, SQLState: 23000
+2025-08-17T16:09:50.074+09:00 ERROR 5356 --- [MySpringbootLab] [http-nio-8080-exec-1] o.h.e.j.s.SqlExceptionHelper             : (conn=3) Duplicate entry '9788956746432' for key 'idx_books_isbn'
+2025-08-17T16:09:50.076+09:00  WARN 5356 --- [MySpringbootLab] [http-nio-8080-exec-1] c.r.m.e.DefaultExceptionAdvice           : IntegrityViolation: (conn=3) Duplicate entry '9788956746432' for key 'idx_books_isbn'
+2025-08-17T16:09:50.077+09:00  WARN 5356 --- [MySpringbootLab] [http-nio-8080-exec-1] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.dao.DataIntegrityViolationException: could not execute statement [(conn=3) Duplicate entry '9788956746432' for key 'idx_books_isbn'] [insert into books (author,isbn,price,publish_date,title) values (?,?,?,?,?)]; SQL [insert into books (author,isbn,price,publish_date,title) values (?,?,?,?,?)]; constraint [idx_books_isbn]]
+2025-08-17T16:13:43.156+09:00  WARN 5356 --- [MySpringbootLab] [http-nio-8080-exec-2] o.m.j.m.s.ErrorPacket                    : Error: 1062-23000: Duplicate entry '9788956746425' for key 'idx_books_isbn'
+2025-08-17T16:13:43.156+09:00  WARN 5356 --- [MySpringbootLab] [http-nio-8080-exec-2] o.h.e.j.s.SqlExceptionHelper             : SQL Error: 1062, SQLState: 23000
+2025-08-17T16:13:43.156+09:00 ERROR 5356 --- [MySpringbootLab] [http-nio-8080-exec-2] o.h.e.j.s.SqlExceptionHelper             : (conn=3) Duplicate entry '9788956746425' for key 'idx_books_isbn'
+2025-08-17T16:13:43.159+09:00  WARN 5356 --- [MySpringbootLab] [http-nio-8080-exec-2] c.r.m.e.DefaultExceptionAdvice           : IntegrityViolation: (conn=3) Duplicate entry '9788956746425' for key 'idx_books_isbn'
+2025-08-17T16:13:43.160+09:00  WARN 5356 --- [MySpringbootLab] [http-nio-8080-exec-2] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.dao.DataIntegrityViolationException: could not execute statement [(conn=3) Duplicate entry '9788956746425' for key 'idx_books_isbn'] [insert into books (author,isbn,price,publish_date,title) values (?,?,?,?,?)]; SQL [insert into books (author,isbn,price,publish_date,title) values (?,?,?,?,?)]; constraint [idx_books_isbn]]
+2025-08-17T16:13:43.372+09:00  WARN 5356 --- [MySpringbootLab] [http-nio-8080-exec-8] o.m.j.m.s.ErrorPacket                    : Error: 1062-23000: Duplicate entry '9788956746432' for key 'idx_books_isbn'
+2025-08-17T16:13:43.372+09:00  WARN 5356 --- [MySpringbootLab] [http-nio-8080-exec-8] o.h.e.j.s.SqlExceptionHelper             : SQL Error: 1062, SQLState: 23000
+2025-08-17T16:13:43.372+09:00 ERROR 5356 --- [MySpringbootLab] [http-nio-8080-exec-8] o.h.e.j.s.SqlExceptionHelper             : (conn=3) Duplicate entry '9788956746432' for key 'idx_books_isbn'
+2025-08-17T16:13:43.373+09:00  WARN 5356 --- [MySpringbootLab] [http-nio-8080-exec-8] c.r.m.e.DefaultExceptionAdvice           : IntegrityViolation: (conn=3) Duplicate entry '9788956746432' for key 'idx_books_isbn'
+2025-08-17T16:13:43.374+09:00  WARN 5356 --- [MySpringbootLab] [http-nio-8080-exec-8] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.dao.DataIntegrityViolationException: could not execute statement [(conn=3) Duplicate entry '9788956746432' for key 'idx_books_isbn'] [insert into books (author,isbn,price,publish_date,title) values (?,?,?,?,?)]; SQL [insert into books (author,isbn,price,publish_date,title) values (?,?,?,?,?)]; constraint [idx_books_isbn]]
+2025-08-17T16:23:03.092+09:00  INFO 5356 --- [MySpringbootLab] [SpringApplicationShutdownHook] o.s.b.w.e.t.GracefulShutdown             : Commencing graceful shutdown. Waiting for active requests to complete
+2025-08-17T16:23:03.106+09:00  INFO 5356 --- [MySpringbootLab] [tomcat-shutdown] o.s.b.w.e.t.GracefulShutdown             : Graceful shutdown complete
+2025-08-17T16:23:03.111+09:00  INFO 5356 --- [MySpringbootLab] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-08-17T16:23:03.113+09:00  INFO 5356 --- [MySpringbootLab] [SpringApplicationShutdownHook] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown initiated...
+2025-08-17T16:23:03.118+09:00  INFO 5356 --- [MySpringbootLab] [SpringApplicationShutdownHook] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown completed.
+2025-08-17T16:25:04.169+09:00  INFO 4384 --- [MySpringbootLab] [main] c.r.m.MySpringbootLabApplicationTests    : Starting MySpringbootLabApplicationTests using Java 23.0.1 with PID 4384 (started by 82103 in C:\mybackend\SpringBoot\MySpringbootLab)
+2025-08-17T16:25:04.178+09:00  INFO 4384 --- [MySpringbootLab] [main] c.r.m.MySpringbootLabApplicationTests    : The following 1 profile is active: "prod"
+2025-08-17T16:25:05.187+09:00  INFO 4384 --- [MySpringbootLab] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-08-17T16:25:05.245+09:00  INFO 4384 --- [MySpringbootLab] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 48 ms. Found 1 JPA repository interface.
+2025-08-17T16:25:06.108+09:00  INFO 4384 --- [MySpringbootLab] [main] o.h.j.i.u.LogHelper                      : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-08-17T16:25:06.204+09:00  INFO 4384 --- [MySpringbootLab] [main] o.h.Version                              : HHH000412: Hibernate ORM core version 6.6.22.Final
+2025-08-17T16:25:06.260+09:00  INFO 4384 --- [MySpringbootLab] [main] o.h.c.i.RegionFactoryInitiator           : HHH000026: Second-level cache disabled
+2025-08-17T16:25:06.611+09:00  INFO 4384 --- [MySpringbootLab] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-08-17T16:25:06.642+09:00  INFO 4384 --- [MySpringbootLab] [main] c.z.h.HikariDataSource                   : HikariPool-1 - Starting...
+2025-08-17T16:25:06.735+09:00  INFO 4384 --- [MySpringbootLab] [main] c.z.h.p.HikariPool                       : HikariPool-1 - Added connection org.mariadb.jdbc.Connection@6879e983
+2025-08-17T16:25:06.738+09:00  INFO 4384 --- [MySpringbootLab] [main] c.z.h.HikariDataSource                   : HikariPool-1 - Start completed.
+2025-08-17T16:25:06.767+09:00  WARN 4384 --- [MySpringbootLab] [main] o.h.o.deprecation                        : HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-08-17T16:25:06.801+09:00  INFO 4384 --- [MySpringbootLab] [main] o.h.o.c.pooling                          : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 10.11.5
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-08-17T16:25:07.623+09:00  INFO 4384 --- [MySpringbootLab] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-08-17T16:25:07.723+09:00  INFO 4384 --- [MySpringbootLab] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-08-17T16:25:08.637+09:00  WARN 4384 --- [MySpringbootLab] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-08-17T16:25:09.074+09:00  WARN 4384 --- [MySpringbootLab] [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2025-08-17T16:25:09.492+09:00  INFO 4384 --- [MySpringbootLab] [main] o.s.b.a.e.w.EndpointLinksResolver        : Exposing 1 endpoint beneath base path '/actuator'
+2025-08-17T16:25:09.599+09:00  INFO 4384 --- [MySpringbootLab] [main] c.r.m.MySpringbootLabApplicationTests    : Started MySpringbootLabApplicationTests in 5.938 seconds (process running for 17.213)
+2025-08-17T16:25:09.742+09:00  INFO 4384 --- [MySpringbootLab] [main] c.r.m.r.MyPropRunner                     : 현재 활성화된 MyEnvironment Bean = MyEnvironment(mode=운영환경, rate=1.5)
+2025-08-17T16:25:09.742+09:00  INFO 4384 --- [MySpringbootLab] [main] c.r.m.r.MyPropRunner                     : MyBootProperties.getUsername() = MySpringbootLab
+2025-08-17T16:25:09.743+09:00  INFO 4384 --- [MySpringbootLab] [main] c.r.m.r.MyPropRunner                     : MyBootProperties.getPort() = 54
+2025-08-17T16:25:09.743+09:00  INFO 4384 --- [MySpringbootLab] [main] c.r.m.r.MyPropRunner                     : Properties myprop.username = MySpringbootLab
+2025-08-17T16:25:09.743+09:00  INFO 4384 --- [MySpringbootLab] [main] c.r.m.r.MyPropRunner                     : Properties myprop.port = 8
+2025-08-17T16:25:10.288+09:00  INFO 4384 --- [MySpringbootLab] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-08-17T16:25:10.292+09:00  INFO 4384 --- [MySpringbootLab] [SpringApplicationShutdownHook] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown initiated...
+2025-08-17T16:25:10.297+09:00  INFO 4384 --- [MySpringbootLab] [SpringApplicationShutdownHook] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown completed.
+2025-08-17T16:26:21.794+09:00  INFO 22744 --- [MySpringbootLab] [main] c.r.m.r.BookRepositoryTest               : Starting BookRepositoryTest using Java 23.0.1 with PID 22744 (started by 82103 in C:\mybackend\SpringBoot\MySpringbootLab)
+2025-08-17T16:26:21.800+09:00  INFO 22744 --- [MySpringbootLab] [main] c.r.m.r.BookRepositoryTest               : The following 1 profile is active: "prod"
+2025-08-17T16:26:22.876+09:00  INFO 22744 --- [MySpringbootLab] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-08-17T16:26:22.948+09:00  INFO 22744 --- [MySpringbootLab] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 55 ms. Found 1 JPA repository interface.
+2025-08-17T16:26:23.619+09:00  INFO 22744 --- [MySpringbootLab] [main] o.h.j.i.u.LogHelper                      : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-08-17T16:26:23.692+09:00  INFO 22744 --- [MySpringbootLab] [main] o.h.Version                              : HHH000412: Hibernate ORM core version 6.6.22.Final
+2025-08-17T16:26:23.739+09:00  INFO 22744 --- [MySpringbootLab] [main] o.h.c.i.RegionFactoryInitiator           : HHH000026: Second-level cache disabled
+2025-08-17T16:26:24.085+09:00  INFO 22744 --- [MySpringbootLab] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-08-17T16:26:24.116+09:00  INFO 22744 --- [MySpringbootLab] [main] c.z.h.HikariDataSource                   : HikariPool-1 - Starting...
+2025-08-17T16:26:24.196+09:00  INFO 22744 --- [MySpringbootLab] [main] c.z.h.p.HikariPool                       : HikariPool-1 - Added connection org.mariadb.jdbc.Connection@4bb9f7d4
+2025-08-17T16:26:24.197+09:00  INFO 22744 --- [MySpringbootLab] [main] c.z.h.HikariDataSource                   : HikariPool-1 - Start completed.
+2025-08-17T16:26:24.222+09:00  WARN 22744 --- [MySpringbootLab] [main] o.h.o.deprecation                        : HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-08-17T16:26:24.245+09:00  INFO 22744 --- [MySpringbootLab] [main] o.h.o.c.pooling                          : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 10.11.5
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-08-17T16:26:25.005+09:00  INFO 22744 --- [MySpringbootLab] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-08-17T16:26:25.069+09:00  INFO 22744 --- [MySpringbootLab] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-08-17T16:26:25.808+09:00  WARN 22744 --- [MySpringbootLab] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-08-17T16:26:26.407+09:00  WARN 22744 --- [MySpringbootLab] [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2025-08-17T16:26:27.035+09:00  INFO 22744 --- [MySpringbootLab] [main] o.s.b.a.e.w.EndpointLinksResolver        : Exposing 1 endpoint beneath base path '/actuator'
+2025-08-17T16:26:27.192+09:00  INFO 22744 --- [MySpringbootLab] [main] c.r.m.r.BookRepositoryTest               : Started BookRepositoryTest in 5.83 seconds (process running for 7.403)
+2025-08-17T16:26:27.291+09:00  INFO 22744 --- [MySpringbootLab] [main] c.r.m.r.MyPropRunner                     : 현재 활성화된 MyEnvironment Bean = MyEnvironment(mode=운영환경, rate=1.5)
+2025-08-17T16:26:27.293+09:00  INFO 22744 --- [MySpringbootLab] [main] c.r.m.r.MyPropRunner                     : MyBootProperties.getUsername() = MySpringbootLab
+2025-08-17T16:26:27.293+09:00  INFO 22744 --- [MySpringbootLab] [main] c.r.m.r.MyPropRunner                     : MyBootProperties.getPort() = 61
+2025-08-17T16:26:27.293+09:00  INFO 22744 --- [MySpringbootLab] [main] c.r.m.r.MyPropRunner                     : Properties myprop.username = MySpringbootLab
+2025-08-17T16:26:27.294+09:00  INFO 22744 --- [MySpringbootLab] [main] c.r.m.r.MyPropRunner                     : Properties myprop.port = 73
+2025-08-17T16:26:28.329+09:00  INFO 22744 --- [MySpringbootLab] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-08-17T16:26:28.339+09:00  INFO 22744 --- [MySpringbootLab] [SpringApplicationShutdownHook] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown initiated...
+2025-08-17T16:26:28.352+09:00  INFO 22744 --- [MySpringbootLab] [SpringApplicationShutdownHook] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown completed.
