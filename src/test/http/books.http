@@ -4,11 +4,11 @@
 @isbn1 = 9788956746425
 @isbn2 = 9788956746432
 
-# 기본값, 실제 호출 성공 시 덮어씌워짐
-@book1Id = 1
-@book2Id = 2
+# 기본값(조회 성공 시 덮어쓰기)
+@book1Id = 56
+@book2Id = 57
 
-### 책1: ISBN으로 조회해서 id 세팅 (이미 DB에 있으므로 200)
+### 책1 ISBN으로 조회해 id 세팅 (200)
 GET {{host}}/api/books/isbn/{{isbn1}}
 
 > {%
@@ -16,7 +16,7 @@ GET {{host}}/api/books/isbn/{{isbn1}}
     if (body && body.id) client.global.set("book1Id", body.id);
 %}
 
-### 책2: ISBN으로 조회해서 id 세팅
+### 책2 ISBN으로 조회해 id 세팅 (200)
 GET {{host}}/api/books/isbn/{{isbn2}}
 
 > {%
@@ -24,26 +24,31 @@ GET {{host}}/api/books/isbn/{{isbn2}}
     if (body && body.id) client.global.set("book2Id", body.id);
 %}
 
-### 전체 조회
+### 전체 조회 (200, DTO 배열)
 GET {{host}}/api/books
 
-### ID로 조회 (책1)
+### ID로 조회 (책1, 200)
 GET {{host}}/api/books/{{book1Id}}
 
-### 수정 (책2 가격 → 36000)
+### 부분 수정 책2 가격만 36000으로 (200)
 PUT {{host}}/api/books/{{book2Id}}
 Content-Type: application/json
 
 {
-  "title": "JPA 프로그래밍",
-  "author": "박둘리",
-  "isbn": "{{isbn2}}",
-  "price": 36000,
+  "price": 36000
+}
+
+### 부분 수정 책2 저자+출판일만 변경 (200)
+PUT {{host}}/api/books/{{book2Id}}
+Content-Type: application/json
+
+{
+  "author": "박둘리(개정판)",
   "publishDate": "2025-04-30"
 }
 
-### 삭제 (책2)
+### 삭제 (책2, 204)
 DELETE {{host}}/api/books/{{book2Id}}
 
-### 삭제 확인(404)
+### 삭제 확인 (404 + ErrorObject)
 GET {{host}}/api/books/{{book2Id}}
