@@ -1,18 +1,17 @@
 package com.rookies4.myspringbootlab.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "books")
-@Getter
-@Setter
+@Getter @Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @DynamicUpdate
 public class Book {
 
@@ -34,12 +33,19 @@ public class Book {
     @Column(nullable = false)
     private LocalDate publishDate;
 
-    // 생성자
-    public Book(String title, String author, String isbn, Integer price, LocalDate publishDate) {
-        this.title = title;
-        this.author = author;
-        this.isbn = isbn;
-        this.price = price;
-        this.publishDate = publishDate;
+    @OneToOne(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private BookDetail bookDetail;
+
+    // 양방향 연관관계 세팅
+    public void setBookDetail(BookDetail detail) {
+        // 기존 연결 해제
+        if (this.bookDetail != null) {
+            this.bookDetail.setBook(null);
+        }
+        // 새 연결
+        this.bookDetail = detail;
+        if (detail != null) {
+            detail.setBook(this);
+        }
     }
 }
