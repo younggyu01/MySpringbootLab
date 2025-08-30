@@ -3,7 +3,6 @@ package com.rookies4.myspringbootlab.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
-
 import java.time.LocalDate;
 
 @Entity
@@ -33,16 +32,20 @@ public class Book {
     @Column(nullable = false)
     private LocalDate publishDate;
 
+    //1:1
     @OneToOne(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private BookDetail bookDetail;
 
-    // 양방향 연관관계 세팅
+    //1:N
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "publisher_id")
+    private Publisher publisher;
+
+    // 양방향 연관관계
     public void setBookDetail(BookDetail detail) {
-        // 기존 연결 해제
         if (this.bookDetail != null) {
             this.bookDetail.setBook(null);
         }
-        // 새 연결
         this.bookDetail = detail;
         if (detail != null) {
             detail.setBook(this);

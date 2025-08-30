@@ -11,7 +11,7 @@ import java.time.LocalDate;
 
 public class BookDTO {
 
-    // 생성 요청
+    //POST
     @Data @NoArgsConstructor @AllArgsConstructor @Builder
     public static class CreateRequest {
         @NotBlank(message = "Book title is required")
@@ -21,15 +21,20 @@ public class BookDTO {
         private String author;
 
         @NotBlank(message = "ISBN is required")
-        @Pattern(regexp = "^(?=(?:\\D*\\d){10}(?:(?:\\D*\\d){3})?$)[\\d-]+$",
-                message = "ISBN must be valid (10 or 13 digits, with or without hyphens)")
+        @Pattern(
+                regexp = "^(?=(?:\\D*\\d){10}(?:(?:\\D*\\d){3})?$)[\\d-]+$",
+                message = "ISBN must be valid (10 or 13 digits, with or without hyphens)"
+        )
         private String isbn;
 
         @PositiveOrZero(message = "Price must be positive or zero")
         private Integer price;
 
-        @Past(message = "Publish date must be in the past")
+        @Past(message = "Publish date cannot be in the future")
         private LocalDate publishDate;
+
+        @NotNull(message = "Publisher ID is required")
+        private Long publisherId;
 
         @Valid
         private BookDetailDTO detailRequest;
@@ -42,7 +47,6 @@ public class BookDTO {
                     .price(price)
                     .publishDate(publishDate)
                     .build();
-
             if (detailRequest != null) {
                 book.setBookDetail(detailRequest.toEntity());
             }
@@ -50,36 +54,62 @@ public class BookDTO {
         }
     }
 
-    // 전체 수정(put)
+    //PUT
     @Data @NoArgsConstructor @AllArgsConstructor @Builder
     public static class UpdateRequest {
-        @NotBlank private String title;
-        @NotBlank private String author;
-        @NotBlank
-        @Pattern(regexp = "^(?=(?:\\D*\\d){10}(?:(?:\\D*\\d){3})?$)[\\d-]+$")
+        @NotBlank(message = "Book title is required")
+        private String title;
+
+        @NotBlank(message = "Author name is required")
+        private String author;
+
+        @NotBlank(message = "ISBN is required")
+        @Pattern(
+                regexp = "^(?=(?:\\D*\\d){10}(?:(?:\\D*\\d){3})?$)[\\d-]+$",
+                message = "ISBN must be valid (10 or 13 digits, with or without hyphens)"
+        )
         private String isbn;
-        @PositiveOrZero private Integer price;
-        @Past private LocalDate publishDate;
+
+        @PositiveOrZero(message = "Price must be positive or zero")
+        private Integer price;
+
+        @Past(message = "Publish date cannot be in the future")
+        private LocalDate publishDate;
+
+        @NotNull(message = "Publisher ID is required")
+        private Long publisherId;
 
         @Valid
         private BookDetailDTO detailRequest;
     }
 
-    // 부분 수정(patch)
+    //PATCH
     @Data @NoArgsConstructor @AllArgsConstructor @Builder
     public static class PatchRequest {
         @Nullable private String title;
         @Nullable private String author;
-        @Nullable
-        @Pattern(regexp = "^(?=(?:\\D*\\d){10}(?:(?:\\D*\\d){3})?$)[\\d-]+$")
-        private String isbn;
-        @Nullable @PositiveOrZero private Integer price;
-        @Nullable @Past private LocalDate publishDate;
 
-        @Valid
-        @Nullable private BookDetailPatchRequest detailRequest;
+        @Nullable
+        @Pattern(
+                regexp = "^(?=(?:\\D*\\d){10}(?:(?:\\D*\\d){3})?$)[\\d-]+$",
+                message = "ISBN must be valid (10 or 13 digits, with or without hyphens)"
+        )
+        private String isbn;
+
+        @Nullable @PositiveOrZero(message = "Price must be positive or zero")
+        private Integer price;
+
+        @Nullable @Past(message = "Publish date cannot be in the future")
+        private LocalDate publishDate;
+
+        @Nullable
+        private Long publisherId; // null이면 변경 없음
+
+        @Valid @Nullable
+        private BookDetailPatchRequest detailRequest;
     }
 
+    //내부 DTO
     @Data @NoArgsConstructor @AllArgsConstructor @Builder
     public static class BookDetailDTO {
         private String description;
@@ -101,7 +131,6 @@ public class BookDTO {
         }
     }
 
-    // BookDetail만 patch
     @Data @NoArgsConstructor @AllArgsConstructor @Builder
     public static class BookDetailPatchRequest {
         @Nullable private String description;
@@ -112,7 +141,7 @@ public class BookDTO {
         @Nullable private String edition;
     }
 
-    // 응답
+    //Response
     @Data @NoArgsConstructor @AllArgsConstructor @Builder
     public static class Response {
         private Long id;
@@ -122,6 +151,8 @@ public class BookDTO {
         private Integer price;
         private LocalDate publishDate;
         private BookDetailResponse detail;
+        //출판사 요약 정보
+        private PublisherView publisher;
 
         public static Response fromEntity(Book book) {
             BookDetailResponse d = null;
@@ -146,6 +177,36 @@ public class BookDTO {
                     .detail(d)
                     .build();
         }
+
+        //출판사 정보
+        public static Response fromEntityWithPublisher(Book book) {
+            Response base = fromEntity(book);
+            if (book.getPublisher() != null) {
+                base.setPublisher(PublisherView.builder()
+                        .id(book.getPublisher().getId())
+                        .name(book.getPublisher().getName())
+                        .establishedDate(book.getPublisher().getEstablishedDate())
+                        .address(book.getPublisher().getAddress())
+                        .bookCount(null) //기본 null
+                        .build());
+            }
+            return base;
+        }
+
+        //출판사 도서 수
+        public static Response fromEntityWithPublisher(Book book, long bookCount) {
+            Response base = fromEntity(book);
+            if (book.getPublisher() != null) {
+                base.setPublisher(PublisherView.builder()
+                        .id(book.getPublisher().getId())
+                        .name(book.getPublisher().getName())
+                        .establishedDate(book.getPublisher().getEstablishedDate())
+                        .address(book.getPublisher().getAddress())
+                        .bookCount(bookCount)
+                        .build());
+            }
+            return base;
+        }
     }
 
     @Data @NoArgsConstructor @AllArgsConstructor @Builder
@@ -157,5 +218,33 @@ public class BookDTO {
         private String publisher;
         private String coverImageUrl;
         private String edition;
+    }
+
+    //Book
+    @Data @NoArgsConstructor @AllArgsConstructor @Builder
+    public static class SimpleResponse {
+        private Long id;
+        private String title;
+        private String author;
+        private String isbn;
+
+        public static SimpleResponse fromEntity(Book b) {
+            return SimpleResponse.builder()
+                    .id(b.getId())
+                    .title(b.getTitle())
+                    .author(b.getAuthor())
+                    .isbn(b.getIsbn())
+                    .build();
+        }
+    }
+
+    //Publisher 요약
+    @Data @NoArgsConstructor @AllArgsConstructor @Builder
+    public static class PublisherView {
+        private Long id;
+        private String name;
+        private LocalDate establishedDate;
+        private String address;
+        @Nullable private Long bookCount;
     }
 }

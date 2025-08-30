@@ -1,72 +1,235 @@
-@host = http://localhost:8080
-# 전체 조회 후 id 설정
-@id = 59
+@host = localhost
+@port = 8080
+@base = http://{{host}}:{{port}}
+@json = application/json
 
-### 0. 전체 조회 (id 확인용)
-GET {{host}}/api/books
-
-### 1-1. 등록 (post)
-POST {{host}}/api/books
-Content-Type: application/json
+### 0.1 Penguin Random House (생성 시도)
+POST {{base}}/api/publishers
+Content-Type: {{json}}
 
 {
-  "title": "Clean Code",
-  "author": "Robert C. Martin",
-  "isbn": "9780132350884",
-  "price": 45,
-  "publishDate": "2008-08-01",
+  "name": "Penguin Random House",
+  "establishedDate": "2013-07-01",
+  "address": "1745 Broadway, New York, NY 10019"
+}
+
+### 0.1.1 Penguin Random House ID 세팅
+GET {{base}}/api/publishers/name/Penguin%20Random%20House
+Accept: {{json}}
+
+> {%
+    const js = (typeof response.body === 'string') ? JSON.parse(response.body) : response.body;
+    client.global.set("prhId", String(js.id));
+%}
+
+### 0.2 O'Reilly Media (생성 시도)
+POST {{base}}/api/publishers
+Content-Type: {{json}}
+
+{
+  "name": "O'Reilly Media",
+  "establishedDate": "1978-01-01",
+  "address": "1005 Gravenstein Highway North, Sebastopol, CA 95472"
+}
+
+### 0.2.1 O'Reilly Media ID 세팅 (URL 인코딩)
+GET {{base}}/api/publishers/name/O%27Reilly%20Media
+Accept: {{json}}
+
+> {%
+    const js = (typeof response.body === 'string') ? JSON.parse(response.body) : response.body;
+    client.global.set("oreillyId", String(js.id));
+%}
+
+### 0.3 Prentice Hall (생성 시도)
+POST {{base}}/api/publishers
+Content-Type: {{json}}
+
+{
+  "name": "Prentice Hall",
+  "establishedDate": "1913-01-01",
+  "address": "Old Tappan, NJ"
+}
+
+### 0.3.1 Prentice Hall ID 세팅
+GET {{base}}/api/publishers/name/Prentice%20Hall
+Accept: {{json}}
+
+> {%
+    const js = (typeof response.body === 'string') ? JSON.parse(response.body) : response.body;
+    client.global.set("phId", String(js.id));
+%}
+
+### 0.4 Manning Publications (생성 시도)
+POST {{base}}/api/publishers
+Content-Type: {{json}}
+
+{
+  "name": "Manning Publications",
+  "establishedDate": "1993-01-01",
+  "address": "20 Baldwin Road, PO Box 761, Shelter Island, NY 11964"
+}
+
+### 0.4.1 Manning Publications ID 세팅
+GET {{base}}/api/publishers/name/Manning%20Publications
+Accept: {{json}}
+
+> {%
+    const js = (typeof response.body === 'string') ? JSON.parse(response.body) : response.body;
+    client.global.set("manningId", String(js.id));
+%}
+
+### 도서 생성 (6권) -> 제목 검색으로 ID,ISBN 변수 저장
+
+### 0.5 PRH - Atomic Habits
+POST {{base}}/api/books
+Content-Type: {{json}}
+
+{
+  "title": "Atomic Habits",
+  "author": "James Clear",
+  "isbn": "978-0735211292",
+  "price": 20000,
+  "publishDate": "2018-10-16",
+  "publisherId": {{prhId}},
   "detailRequest": {
-    "description": "A handbook of agile software craftsmanship",
+    "description": "An Easy & Proven Way to Build Good Habits & Break Bad Ones",
     "language": "English",
-    "pageCount": 464,
-    "publisher": "Prentice Hall",
-    "coverImageUrl": "https://example.com/cleancode.jpg",
-    "edition": "1st"
+    "pageCount": 320,
+    "publisher": "Avery",
+    "coverImageUrl": "https://example.com/atomic-habits.jpg",
+    "edition": "1st Edition"
   }
 }
 
-### 1-2. 등록 (post)
-POST {{host}}/api/books
-Content-Type: application/json
+### 0.5.1 Atomic Habits 식별자 세팅
+GET {{base}}/api/books/search/title?title=Atomic%20Habits
+Accept: {{json}}
+
+> {%
+    const arr = (typeof response.body === 'string') ? JSON.parse(response.body) : response.body;
+    const item = arr.find(b => b.title === "Atomic Habits");
+    if (item) {
+        client.global.set("atomicId", String(item.id));
+        client.global.set("atomicIsbn", String(item.isbn));
+    }
+%}
+
+### 0.6 PRH - The Pragmatic Programmer
+POST {{base}}/api/books
+Content-Type: {{json}}
+
+{
+  "title": "The Pragmatic Programmer",
+  "author": "Andrew Hunt",
+  "isbn": "978-0135957059",
+  "price": 38000,
+  "publishDate": "2019-09-13",
+  "publisherId": {{prhId}},
+  "detailRequest": {
+    "description": "Your Journey to Mastery",
+    "language": "English",
+    "pageCount": 352,
+    "publisher": "Addison-Wesley",
+    "coverImageUrl": "https://example.com/pragmatic.jpg",
+    "edition": "20th Anniversary Edition"
+  }
+}
+
+### 0.6.1 The Pragmatic Programmer 식별자 세팅
+GET {{base}}/api/books/search/title?title=The%20Pragmatic%20Programmer
+Accept: {{json}}
+
+> {%
+    const arr = (typeof response.body === 'string') ? JSON.parse(response.body) : response.body;
+    const item = arr.find(b => b.title === "The Pragmatic Programmer");
+    if (item) {
+        client.global.set("pragmaticId", String(item.id));
+        client.global.set("pragmaticIsbn", String(item.isbn));
+    }
+%}
+
+### 0.7 O'Reilly - Effective Java
+POST {{base}}/api/books
+Content-Type: {{json}}
 
 {
   "title": "Effective Java",
   "author": "Joshua Bloch",
-  "isbn": "9780134685991",
-  "price": 55,
-  "publishDate": "2017-12-27",
+  "isbn": "978-0134685991",
+  "price": 38000,
+  "publishDate": "2018-01-06",
+  "publisherId": {{oreillyId}},
   "detailRequest": {
-    "description": "The definitive guide to Java programming language",
+    "description": "A comprehensive guide to Java",
     "language": "English",
     "pageCount": 416,
     "publisher": "Addison-Wesley",
-    "coverImageUrl": "https://example.com/effectivejava.jpg",
-    "edition": "3rd"
+    "coverImageUrl": "https://example.com/effective-java.jpg",
+    "edition": "3rd Edition"
   }
 }
 
-### 2. ISBN으로 책 조회 (GET)
-GET {{host}}/api/books/isbn/9780132350884
+### 0.7.1 Effective Java 식별자 세팅
+GET {{base}}/api/books/search/title?title=Effective%20Java
+Accept: {{json}}
 
-### 3-1. 저자로 책 검색
-GET {{host}}/api/books/search/author?author=Robert
+> {%
+    const arr = (typeof response.body === 'string') ? JSON.parse(response.body) : response.body;
+    const item = arr.find(b => b.title === "Effective Java");
+    if (item) {
+        client.global.set("effectiveJavaId", String(item.id));
+        client.global.set("effectiveJavaIsbn", String(item.isbn));
+    }
+%}
 
-### 3-2. 제목으로 책 검색
-GET {{host}}/api/books/search/title?title=Clean
+### 0.8 O'Reilly - Java: The Complete Reference
+POST {{base}}/api/books
+Content-Type: {{json}}
 
-### 4. 수정 (PUT) - 전체수정
-# 전체 조회 후 id 설정
-PUT {{host}}/api/books/{{id}}
-Content-Type: application/json
+{
+  "title": "Java: The Complete Reference",
+  "author": "Herbert Schildt",
+  "isbn": "978-1260440232",
+  "price": 45000,
+  "publishDate": "2017-05-26",
+  "publisherId": {{oreillyId}},
+  "detailRequest": {
+    "description": "The definitive Java programming guide",
+    "language": "English",
+    "pageCount": 1368,
+    "publisher": "McGraw-Hill Education",
+    "coverImageUrl": "https://example.com/java-complete.jpg",
+    "edition": "11th Edition"
+  }
+}
+
+### 0.8.1 Java: The Complete Reference 식별자 세팅
+GET {{base}}/api/books/search/title?title=Java:%20The%20Complete%20Reference
+Accept: {{json}}
+
+> {%
+    const arr = (typeof response.body === 'string') ? JSON.parse(response.body) : response.body;
+    const item = arr.find(b => b.title === "Java: The Complete Reference");
+    if (item) {
+        client.global.set("javaRefId", String(item.id));
+        client.global.set("javaRefIsbn", String(item.isbn));
+    }
+%}
+
+### 0.9 Prentice Hall - Clean Code
+POST {{base}}/api/books
+Content-Type: {{json}}
 
 {
   "title": "Clean Code",
   "author": "Robert C. Martin",
-  "isbn": "9780132350884",
-  "price": 45,
+  "isbn": "978-0132350884",
+  "price": 30000,
   "publishDate": "2008-08-01",
+  "publisherId": {{phId}},
   "detailRequest": {
-    "description": "A handbook of agile software craftsmanship",
+    "description": "A Handbook of Agile Software Craftsmanship",
     "language": "English",
     "pageCount": 464,
     "publisher": "Prentice Hall",
@@ -75,23 +238,267 @@ Content-Type: application/json
   }
 }
 
-### 4-1. (제목만 수정) PATCH
-PATCH {{host}}/api/books/{{id}}
-Content-Type: application/json
+### 0.9.1 Clean Code 식별자 세팅
+GET {{base}}/api/books/search/title?title=Clean%20Code
+Accept: {{json}}
 
-{ "title": "새로운 제목" }
+> {%
+    const arr = (typeof response.body === 'string') ? JSON.parse(response.body) : response.body;
+    const item = arr.find(b => b.title === "Clean Code");
+    if (item) {
+        client.global.set("cleanCodeId", String(item.id));
+        client.global.set("cleanCodeIsbn", String(item.isbn));
+    }
+%}
 
-### 4-2. 가격과 언어만 수정 PATCH
-PATCH {{host}}/api/books/{{id}}
-Content-Type: application/json
+### 0.10 Prentice Hall - Clean Architecture
+POST {{base}}/api/books
+Content-Type: {{json}}
 
 {
-  "price": 15000,
-  "detailRequest": { "language": "Korean" }
+  "title": "Clean Architecture",
+  "author": "Robert C. Martin",
+  "isbn": "978-0134494166",
+  "price": 32000,
+  "publishDate": "2017-09-20",
+  "publisherId": {{phId}},
+  "detailRequest": {
+    "description": "A Craftsman's Guide to Software Structure and Design",
+    "language": "English",
+    "pageCount": 432,
+    "publisher": "Pearson",
+    "coverImageUrl": "https://example.com/clean-architecture.jpg",
+    "edition": "1st"
+  }
 }
 
-### 4-3. BookDetail의 설명만 수정 PATCH
-PATCH {{host}}/api/books/{{id}}/detail
-Content-Type: application/json
+### 0.10.1 Clean Architecture 식별자 세팅
+GET {{base}}/api/books/search/title?title=Clean%20Architecture
+Accept: {{json}}
 
-{ "description": "새로운 책 설명" }
+> {%
+    const arr = (typeof response.body === 'string') ? JSON.parse(response.body) : response.body;
+    const item = arr.find(b => b.title === "Clean Architecture");
+    if (item) {
+        client.global.set("cleanArchId", String(item.id));
+        client.global.set("cleanArchIsbn", String(item.isbn));
+    }
+%}
+
+### 1. Publisher API 테스트
+
+### 1.1 모든 출판사 조회
+GET {{base}}/api/publishers
+Accept: {{json}}
+
+### 1.2 특정 출판사 조회
+GET {{base}}/api/publishers/{{prhId}}
+Accept: {{json}}
+
+### 1.3 출판사 이름으로 조회
+GET {{base}}/api/publishers/name/O%27Reilly%20Media
+Accept: {{json}}
+
+### 1.4 출판사별 도서 목록 조회
+GET {{base}}/api/publishers/{{oreillyId}}/books
+Accept: {{json}}
+
+### 1.5 새 출판사 생성
+POST {{base}}/api/publishers
+Content-Type: {{json}}
+
+{
+  "name": "Wiley",
+  "establishedDate": "1807-01-01",
+  "address": "111 River Street, Hoboken, NJ 07030"
+}
+
+### 1.5.1 Wiley ID 세팅
+GET {{base}}/api/publishers/name/Wiley
+Accept: {{json}}
+
+> {%
+    const js = (typeof response.body === 'string') ? JSON.parse(response.body) : response.body;
+    client.global.set("wileyId", String(js.id));
+%}
+
+### 1.6 출판사 정보 수정
+PUT {{base}}/api/publishers/{{wileyId}}
+Content-Type: {{json}}
+
+{
+  "name": "John Wiley & Sons",
+  "establishedDate": "1807-01-01",
+  "address": "111 River Street, Hoboken, NJ 07030, USA"
+}
+
+### 1.7 출판사 삭제 (도서가 없는 경우)
+DELETE {{base}}/api/publishers/{{wileyId}}
+
+### 1.8 출판사 삭제 (도서가 있는 경우 - 에러)
+DELETE {{base}}/api/publishers/1
+
+### 2. Book API 테스트
+
+### 2.1 모든 도서 조회
+GET {{base}}/api/books
+Accept: {{json}}
+
+### 2.2 ID로 도서 조회
+GET {{base}}/api/books/{{effectiveJavaId}}
+Accept: {{json}}
+
+### 2.3 ISBN으로 도서 조회
+GET {{base}}/api/books/isbn/{{effectiveJavaIsbn}}
+Accept: {{json}}
+
+### 2.4 작가로 도서 검색
+GET {{base}}/api/books/search/author?author=Joshua
+Accept: {{json}}
+
+### 2.5 제목으로 도서 검색
+GET {{base}}/api/books/search/title?title=Complete
+Accept: {{json}}
+
+### 2.6 새 도서 생성 (상세 정보 포함)
+POST {{base}}/api/books
+Content-Type: {{json}}
+
+{
+  "title": "Spring Boot in Action",
+  "author": "Craig Walls",
+  "isbn": "978-1617292545",
+  "price": 45000,
+  "publishDate": "2016-01-30",
+  "publisherId": {{manningId}},
+  "detailRequest": {
+    "description": "A developer's guide to Spring Boot",
+    "language": "English",
+    "pageCount": 264,
+    "publisher": "Manning Publications",
+    "coverImageUrl": "https://example.com/spring-boot-in-action.jpg",
+    "edition": "1st Edition"
+  }
+}
+
+### 2.6.1 Spring Boot in Action ID 세팅
+GET {{base}}/api/books/search/title?title=Spring%20Boot%20in%20Action
+Accept: {{json}}
+
+> {%
+    const arr = (typeof response.body === 'string') ? JSON.parse(response.body) : response.body;
+    const item = arr.find(b => b.title === "Spring Boot in Action");
+    if (item) {
+        client.global.set("springBootId", String(item.id));
+        client.global.set("springBootIsbn", String(item.isbn));
+    }
+%}
+
+### 2.7 새 도서 생성 (상세 정보 제외)
+POST {{base}}/api/books
+Content-Type: {{json}}
+
+{
+  "title": "Kotlin in Action",
+  "author": "Dmitry Jemerov",
+  "isbn": "978-1617293290",
+  "price": 38000,
+  "publishDate": "2017-02-12",
+  "publisherId": {{manningId}}
+}
+
+### 2.7.1 Kotlin in Action ID 세팅
+GET {{base}}/api/books/search/title?title=Kotlin%20in%20Action
+Accept: {{json}}
+
+> {%
+    const arr = (typeof response.body === 'string') ? JSON.parse(response.body) : response.body;
+    const item = arr.find(b => b.title === "Kotlin in Action");
+    if (item) {
+        client.global.set("kotlinId", String(item.id));
+        client.global.set("kotlinIsbn", String(item.isbn));
+    }
+%}
+
+### 2.8 도서 정보 수정
+PUT {{base}}/api/books/{{springBootId}}
+Content-Type: {{json}}
+
+{
+  "title": "Spring Boot in Action (Updated)",
+  "author": "Craig Walls",
+  "isbn": "978-1617292545",
+  "price": 48000,
+  "publishDate": "2016-01-30",
+  "publisherId": {{manningId}},
+  "detailRequest": {
+    "description": "A comprehensive developer's guide to Spring Boot",
+    "language": "English",
+    "pageCount": 280,
+    "publisher": "Manning Publications",
+    "coverImageUrl": "https://example.com/spring-boot-in-action-updated.jpg",
+    "edition": "2nd Edition"
+  }
+}
+
+### 2.9 도서 삭제
+DELETE {{base}}/api/books/{{springBootId}}
+
+### 3. 오류 케이스 테스트
+
+### 3.1 존재하지 않는 출판사 조회 - 404
+GET {{base}}/api/publishers/999999
+Accept: {{json}}
+
+### 3.2 존재하지 않는 도서 조회 - 404
+GET {{base}}/api/books/999999
+Accept: {{json}}
+
+### 3.3 중복된 출판사 이름 생성 - 409
+POST {{base}}/api/publishers
+Content-Type: {{json}}
+
+{
+  "name": "O'Reilly Media",
+  "establishedDate": "2022-01-01",
+  "address": "New Address"
+}
+
+### 3.4 중복된 ISBN 생성 - 409
+POST {{base}}/api/books
+Content-Type: {{json}}
+
+{
+  "title": "Another Java Book",
+  "author": "Test Author",
+  "isbn": "{{effectiveJavaIsbn}}",
+  "price": 30000,
+  "publishDate": "2023-01-01",
+  "publisherId": {{oreillyId}}
+}
+
+### 3.5 잘못된 출판사 ID로 도서 생성 - 404
+POST {{base}}/api/books
+Content-Type: {{json}}
+
+{
+  "title": "Test Book",
+  "author": "Test Author",
+  "isbn": "978-9999999999",
+  "price": 25000,
+  "publishDate": "2023-01-01",
+  "publisherId": 999999
+}
+
+### 3.6 유효성 검사 오류 (도서) - 400
+POST {{base}}/api/books
+Content-Type: {{json}}
+
+{
+  "title": "",
+  "author": "",
+  "isbn": "invalid-isbn",
+  "price": -100,
+  "publishDate": "2099-12-31",
+  "publisherId": null
+}

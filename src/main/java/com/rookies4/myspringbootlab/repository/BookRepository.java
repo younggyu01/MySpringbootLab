@@ -10,20 +10,18 @@ import java.util.Optional;
 
 @Repository
 public interface BookRepository extends JpaRepository<Book, Long> {
-
     Optional<Book> findByIsbn(String isbn);
-
     List<Book> findByAuthor(String author);
 
-    // 부분 검색
+    //부분 검색
     List<Book> findByAuthorContainingIgnoreCase(String author);
     List<Book> findByTitleContainingIgnoreCase(String title);
 
-    // 테스트, 로직에서 사용
+    //테스트, 로직에서 사용
     void deleteByIsbn(String isbn);
     boolean existsByIsbn(String isbn);
 
-    // fetch join
+    //fetch join
     @Query("""
            select b from Book b
            left join fetch b.bookDetail
@@ -37,4 +35,17 @@ public interface BookRepository extends JpaRepository<Book, Long> {
            where b.isbn = :isbn
            """)
     Optional<Book> findByIsbnWithBookDetail(@Param("isbn") String isbn);
+
+    //출판사 상세
+    @Query("""
+           select b from Book b
+           left join fetch b.bookDetail
+           left join fetch b.publisher
+           where b.id = :id
+           """)
+    Optional<Book> findByIdWithAllDetails(@Param("id") Long id);
+
+    //Publisher
+    List<Book> findByPublisherId(Long publisherId);
+    Long countByPublisherId(@Param("publisherId") Long publisherId);
 }

@@ -1,18 +1,23 @@
-package com.rookies4.myspringbootlab.exception;
+package com.rookies4.myspringbootlab.exception.advice;
 
+import com.rookies4.myspringbootlab.exception.BusinessException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.Ordered;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 
 @Slf4j
+@Order(Ordered.LOWEST_PRECEDENCE)
 @RestControllerAdvice
 public class DefaultExceptionAdvice {
 
-    // BusinessException -> status + ErrorObject 응답
+    //tatus + ErrorObject
     @ExceptionHandler(BusinessException.class)
     public ResponseEntity<ErrorObject> handleBusiness(BusinessException ex, HttpServletRequest req) {
         ErrorObject body = ErrorObject.of(
@@ -26,7 +31,7 @@ public class DefaultExceptionAdvice {
         return ResponseEntity.status(ex.getStatus()).body(body);
     }
 
-    // ISBN 중복 -> 409
+    // ISBN 중복 - 409
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<ErrorObject> handleIntegrity(DataIntegrityViolationException ex, HttpServletRequest req) {
         ErrorObject body = ErrorObject.of(
@@ -39,7 +44,7 @@ public class DefaultExceptionAdvice {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(body);
     }
 
-    // 그 외 예외 -> 500
+    // 그 외 - 500
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorObject> handleOther(Exception ex, HttpServletRequest req) {
         log.error("Unexpected error", ex);
